@@ -1,22 +1,31 @@
-import styled from 'styled-components';
-
-const indexList: Array<string> = ['공백1', '공백2'];
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Hello from './pages/Hello';
+import Project from './pages/Project';
 
 export default function App() {
-  const handleGoGame = (name: string) => {
-    console.log(name);
-  };
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
 
-  const index = indexList.map((index, idx) => (
-    <li key={idx} onClick={() => handleGoGame(index)}>
-      {index}
-    </li>
-  ));
+  useEffect(() => {
+    const handleUserResizeSize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
 
+    window.addEventListener('resize', handleUserResizeSize);
+
+    return () => {
+      window.removeEventListener('resize', handleUserResizeSize);
+    };
+  });
   return (
-    <>
-      <h4>안내 바</h4>
-      <ul>{index}</ul>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/gblog" element={<Hello userSize={windowSize} />}></Route>
+        <Route path="/gblog/project" element={<Project />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
