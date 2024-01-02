@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import SideBar from '../components/SideBar';
 import { useEffect, useRef, useState } from 'react';
+import { projectData } from '../constants/projectData';
 
 const ProjectLayout = styled.div`
   background-color: ${(props) => props.color};
@@ -17,24 +18,6 @@ const ProjectBox = styled.div`
   width: 100vw;
 `;
 
-const projectData = [
-  {
-    id: 1,
-    name: 'Project1',
-    color: '#dde6ed',
-  },
-  {
-    id: 2,
-    name: 'Project2',
-    color: '#dde6e2',
-  },
-  {
-    id: 3,
-    name: 'Project3',
-    color: '#dde6fd',
-  },
-];
-
 export default function Project() {
   const [current, setCurrent] = useState('project1');
   const projectsRef = useRef<{ [key: string]: IntersectionObserverEntry }>({});
@@ -49,31 +32,39 @@ export default function Project() {
         (project) => project.isIntersecting
       );
 
-      setCurrent(currentProject[0].target.id);
+      if (currentProject[0].target) {
+        setCurrent(currentProject[0].target.id);
+      }
     };
 
     const observer = new IntersectionObserver(callback, {
-      rootMargin: '-20% 0px',
+      rootMargin: '-50%',
       threshold: [0, 1],
     });
 
-    //2. DOM 요소 찾고 Observer달아주기
     const projects = [...document.querySelectorAll('.project')];
 
     projects.forEach((project) => observer.observe(project));
 
-    //3. 언 마운트시 옵저버 해제
     return () => observer.disconnect();
-  }, [setCurrent]);
+  }, []);
 
-  console.log(current);
+  const moveLayoutHandler = (id: number) => {
+    const moveLayout: string = 'project' + id;
+
+    const element = document.getElementById(moveLayout);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <ProjectBox>
-      <SideBar></SideBar>
+      <SideBar current={current} onClick={moveLayoutHandler}></SideBar>
       {projectData.map((project) => {
         return (
           <ProjectLayout
             color={project.color}
+            key={project.id}
             id={'project' + project.id}
             className="project"
           >
