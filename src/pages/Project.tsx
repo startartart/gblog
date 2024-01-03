@@ -3,6 +3,13 @@ import SideBar from '../components/SideBar';
 import { useEffect, useRef, useState } from 'react';
 import { projectData } from '../constants/projectData';
 
+const ProjectBox = styled.div`
+  position: relative;
+  background-color: ${(props) => props.color};
+  width: 100vw;
+  overflow: hidden;
+`;
+
 const ProjectLayout = styled.div`
   background-color: ${(props) => props.color};
   height: 100vh;
@@ -10,12 +17,6 @@ const ProjectLayout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const ProjectBox = styled.div`
-  position: relative;
-  background-color: ${(props) => props.color};
-  width: 100vw;
 `;
 
 export default function Project() {
@@ -68,7 +69,7 @@ export default function Project() {
             id={'project' + project.id}
             className="project"
           >
-            <>{project.name}</>
+            <p>{project.name}</p>
           </ProjectLayout>
         );
       })}
