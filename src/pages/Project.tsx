@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import SideBar from '../components/SideBar';
+import ProjectTemplate from '../components/ProjectTemplate';
 import { useEffect, useRef, useState } from 'react';
 import { projectData } from '../constants/projectData';
 
@@ -69,7 +70,7 @@ export default function Project() {
             id={'project' + project.id}
             className="project"
           >
-            <p>{project.name}</p>
+            <ProjectTemplate project={project}></ProjectTemplate>
           </ProjectLayout>
         );
       })}
