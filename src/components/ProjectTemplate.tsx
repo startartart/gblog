@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 import ProjectRouter from './projects/ProjectRouter';
-import { projectTypeData } from '../datas/projectTypeData';
+import { projectTypeData } from '../data/projectTypeData';
+import { projectContent } from '../data/projectContent';
 
 const ProjectTemplateBox = styled.div`
   display: flex;
   flex-direction: row;
   width: 90%;
   height: 90%;
+  overflow: hidden;
   gap: 1%;
 `;
-
-const TemplateText = styled.p``;
 
 const Area = styled.div`
   border: 1px black solid;
@@ -19,6 +19,7 @@ const Area = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1%;
+  overflow: clip;
 `;
 
 type TemplateProps = {
@@ -39,9 +40,10 @@ export default function ProjectTemplate({
         <Area key={idx1}>
           {Array.from({ length: area }).map((_, idx2) => (
             <Area key={idx1 * 10 + idx2}>
-              <TemplateText>
-                <ProjectRouter type={projectTypeData[project.id][idx1][idx2]}/>
-              </TemplateText>
+              <ProjectRouter
+                type={projectTypeData[project.id][idx1][idx2]}
+                content={projectContent[project.id].content[idx1 * 10 + idx2]}
+              />
             </Area>
           ))}
         </Area>

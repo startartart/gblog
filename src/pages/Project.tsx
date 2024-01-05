@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 import SideBar from '../components/SideBar';
 import ProjectTemplate from '../components/ProjectTemplate';
 import { useEffect, useRef, useState } from 'react';
-import { projectData } from '../datas/projectData';
+import { projectData } from '../data/projectData';
 
 const ProjectBox = styled.div`
   position: relative;
   background-color: ${(props) => props.color};
   width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const ProjectLayout = styled.div`

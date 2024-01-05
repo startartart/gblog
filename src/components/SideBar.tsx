@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import { projectData } from '../datas/projectData';
+import { projectData } from '../data/projectData';
 import SideText from '../components/SideText';
 import RightArrow from '../assets/right-arrow.svg?react';
 
 const SideBarLayout = styled.div<SideBarLayoutProps>`
   position: fixed;
   width: 10%;
-  height: 20%;
+  height: ${(props) => props.size * 6}%;
   right: 0;
   top: 50%;
   transform: translateY(-50%)
@@ -27,8 +27,18 @@ const SideBarLayout = styled.div<SideBarLayoutProps>`
   ${(props) =>
     props.fold &&
     `
-    transform: translateX(70%) translateY(-50%);
+    transform: translateX(80%) translateY(-50%);
   `}
+`;
+
+const StyledArrow = styled(RightArrow)<StyledArrowProps>`
+  transform: ${(props) =>
+    props.fold === 'true' ? 'rotate(180deg)' : 'rotate(0deg)'};
+  transition: transform 0.5s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const FoldBar = styled.div`
@@ -42,8 +52,13 @@ const FoldBar = styled.div`
   align-items: center;
 `;
 
+type StyledArrowProps = {
+  fold: 'true' | 'false';
+};
+
 type SideBarLayoutProps = {
   fold: boolean;
+  size: number;
 };
 
 type SideBarProps = {
@@ -54,14 +69,14 @@ type SideBarProps = {
 export default function SideBar({ current, onClick }: SideBarProps) {
   const [fold, setFold] = useState(false);
 
-  const setFoldHandler = () => {
-    setFold(!fold);
-  };
-
   return (
-    <SideBarLayout fold={fold}>
-      <FoldBar onClick={setFoldHandler}>
-        <RightArrow height={'1rem'} width={'1rem'} />
+    <SideBarLayout fold={fold} size={projectData.length}>
+      <FoldBar onClick={() => setFold(!fold)}>
+        <StyledArrow
+          height={'1rem'}
+          width={'1rem'}
+          fold={fold ? 'true' : 'false'}
+        />
       </FoldBar>
       {projectData.map((project) => {
         return (
