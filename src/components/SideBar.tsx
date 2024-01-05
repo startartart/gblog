@@ -27,7 +27,7 @@ const SideBarLayout = styled.div<SideBarLayoutProps>`
   ${(props) =>
     props.fold &&
     `
-    transform: translateX(70%) translateY(-50%);
+    transform: translateX(80%) translateY(-50%);
   `}
 `;
 
