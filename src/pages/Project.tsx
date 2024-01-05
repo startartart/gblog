@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import SideBar from '../components/SideBar';
 import ProjectTemplate from '../components/ProjectTemplate';
 import { useEffect, useRef, useState } from 'react';
-import { projectData } from '../constants/projectData';
+import { projectData } from '../datas/projectData';
 
 const ProjectBox = styled.div`
   position: relative;
