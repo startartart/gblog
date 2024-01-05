@@ -8,7 +8,7 @@ const ProjectBox = styled.div`
   position: relative;
   background-color: ${(props) => props.color};
   width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const ProjectLayout = styled.div`
