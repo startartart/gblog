@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import { projectData } from '../constants/projectData';
+import { projectData } from '../datas/projectData';
 import SideText from '../components/SideText';
 import RightArrow from '../assets/right-arrow.svg?react';
 
