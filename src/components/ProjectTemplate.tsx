@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import ProjectRouter from './projects/ProjectRouter';
+import { projectTypeData } from '../datas/projectTypeData';
 
 const ProjectTemplateBox = styled.div`
   display: flex;
@@ -25,6 +27,7 @@ type TemplateProps = {
   color: string;
   template: number[];
 };
+
 export default function ProjectTemplate({
   project,
 }: {
@@ -37,7 +40,7 @@ export default function ProjectTemplate({
           {Array.from({ length: area }).map((_, idx2) => (
             <Area key={idx1 * 10 + idx2}>
               <TemplateText>
-                영역 ({idx1},{idx2})
+                <ProjectRouter type={projectTypeData[project.id][idx1][idx2]}/>
               </TemplateText>
             </Area>
           ))}
